@@ -1,13 +1,16 @@
 #include "Solver.h"
 
-Solver::Solver()
+Solver::Solver(Global &_global)
 {
-
+	global = &_global;
 }
 
 void Solver::generateVector()
 {
 	std::cout << "Gerando vetor...\n";
+
+
+
 	sortingVector.resize(vectorSize);
 	for (int i = 0; i < vectorSize; i++)
 		sortingVector.at(i) = i;
@@ -22,7 +25,8 @@ void Solver::generateVector()
 		sortingVector[secondIndex] = auxValue;
 
 	}
-	//for (int i = 0; i < vectorSize; i++)
+
+	for (int i = 0; i < vectorSize; i++)
 	{
 		//std::cout << sortingVector.at(i) << std::endl;
 
@@ -30,4 +34,16 @@ void Solver::generateVector()
 
 	std::cout << "Vetor gerado!\n";
 
+}
+
+void Solver::process()
+{
+	if (deltaClock.getElapsedTime().asSeconds() >= 1/ (double)targetSps || targetSps == 0)
+		step();
+}
+
+void Solver::step()
+{
+	sps = ceil(1 / deltaClock.getElapsedTime().asSeconds());
+	deltaClock.restart();
 }

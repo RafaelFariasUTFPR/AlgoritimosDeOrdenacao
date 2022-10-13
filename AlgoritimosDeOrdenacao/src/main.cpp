@@ -3,47 +3,59 @@
 #include <time.h>
 
 
-#include <SFML/Graphics.hpp>
-#include "../imgui/imgui.h"
-#include "../imgui/imgui-SFML.h"
-
 #include "Solver.h"
+#include "Global.h"
 
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
-#define MENU_WIDTH 400
 
 
 int main()
 {
     srand(time(NULL)); // seed
 
+    Global global;
 
-    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Algoritioms de ordenação", sf::Style::Titlebar | sf::Style::Close);
-
-    ImGui::SFML::Init(window);
+    ImGui::SFML::Init(global.window);
     
-    Solver solver;
+    Solver solver(global);
 
-    sf::Event e;
 
-    sf::Clock deltaClock;
-    while (window.isOpen())
+    while (global.window.isOpen())
     {
-        while (window.pollEvent(e))
+        while (global.window.pollEvent(global.events))
         {
-            ImGui::SFML::ProcessEvent(e);
-            switch (e.type)
+            ImGui::SFML::ProcessEvent(global.events);
+            switch (global.events.type)
             {
             case sf::Event::Closed:
-                window.close();
+                global.window.close();
             }
         }
-        ImGui::SFML::Update(window, deltaClock.restart());
+
+        //global.window.setFramerateLimit(99);
+        solver.process();
+        double fps = 1 / global.deltaTime;
+
+        global.deltaTime = global.deltaClock.getElapsedTime().asSeconds();
+
+        ImGui::SFML::Update(global.window, global.deltaClock.restart());
         ImGui::SetNextWindowSize(ImVec2(MENU_WIDTH, WINDOW_HEIGHT));
         ImGui::SetNextWindowPos(ImVec2(WINDOW_WIDTH - (MENU_WIDTH), 0));
         ImGui::Begin(u8"CONFIGURAÇÃO", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
         
+        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 255, 120));
+        ImGui::Text("FPS: %i", (int)fps);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip(u8"- Frames por segundo");
+
+        ImGui::SameLine(110);
+        ImGui::Text("PPS: %i", solver.sps);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip(u8"Passos por segundo");
+
+        ImGui::PopStyleColor();
+
+        ImGui::Spacing();
+
         if (ImGui::Button("Gerar vetor"))
         {
             solver.generateVector();
@@ -78,20 +90,20 @@ int main()
 
         ImGui::Spacing();
         ImGui::PushItemWidth(150);
-        ImGui::InputInt("PPS", &solver.sps);
+        ImGui::InputInt("PPS alvo", &solver.targetSps);
         ImGui::PopItemWidth();
         if (ImGui::IsItemHovered())
-            ImGui::SetTooltip(u8"- Define a quantidade de PASSOS POR SEGUNDO\n\n- Coloque \" 0 \" para definir como infinito\n\n- Apenas aplicavel quando \"Visual\" está ativado");
+            ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \" 0 \" para definir como infinito\n\n- Apenas aplicavel quando \"Visual\" está ativado");
 
        
         ImGui::End();
 
 
-        window.clear(sf::Color(sf::Color::Black));
+        global.window.clear(sf::Color(sf::Color::Black));
 
-        ImGui::SFML::Render(window);
+        ImGui::SFML::Render(global.window);
 
-        window.display();
+        global.window.display();
 
     }
 

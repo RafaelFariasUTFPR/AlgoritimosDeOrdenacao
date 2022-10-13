@@ -2,23 +2,34 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 #include "AlgorithmMaster.h"
 #include "RandomGenerator.h"
+#include "Global.h"
 
 class Solver
 {
 public:
-	Solver();
+	Solver(Global &_global);
 
 	void generateVector();
 
-	int sps = 0; // Steps per second
+	void process();
+
+	int sps; // Steps per second
+
+	int targetSps = 30;
 
 	bool isVisual = true;
-	int vectorSize = 1000;
+	int vectorSize = 10000;
 
 private:
+	void step();
+
 	std::vector<int> sortingVector;
+	Global* global;
+	sf::Clock deltaClock;
+
 };
 
