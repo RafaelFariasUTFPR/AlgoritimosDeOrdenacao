@@ -1,8 +1,9 @@
 #include "Solver.h"
 
-Solver::Solver(Global &_global)
+Solver::Solver(Global &_global) : algorithm(*global)
 {
 	global = &_global;
+	
 }
 
 void Solver::generateVector()
@@ -29,7 +30,6 @@ void Solver::generateVector()
 	for (int i = 0; i < vectorSize; i++)
 	{
 		//std::cout << sortingVector.at(i) << std::endl;
-
 	}
 
 	std::cout << "Vetor gerado!\n";
@@ -42,8 +42,28 @@ void Solver::process()
 		step();
 }
 
+void Solver::bubbleSortWhole()
+{
+	if (!sortingVector.size())
+		return;
+
+	algorithm.bubbleSort(&sortingVector);
+	for (int i = 0; i < vectorSize; i++)
+	{
+		//std::cout << sortingVector.at(i) << std::endl;
+	}
+	std::cout << "Passos: " << algorithm.numberOfSteps;
+
+}
+
+
 void Solver::step()
 {
 	sps = ceil(1 / deltaClock.getElapsedTime().asSeconds());
 	deltaClock.restart();
+
+
+
+
+
 }

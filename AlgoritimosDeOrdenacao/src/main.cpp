@@ -18,9 +18,12 @@ int main()
     
     Solver solver(global);
 
+    
+
 
     while (global.window.isOpen())
     {
+        
         while (global.window.pollEvent(global.events))
         {
             ImGui::SFML::ProcessEvent(global.events);
@@ -31,7 +34,7 @@ int main()
             }
         }
 
-        //global.window.setFramerateLimit(99);
+        //global.window.setFramerateLimit(30);
         solver.process();
         double fps = 1 / global.deltaTime;
 
@@ -58,6 +61,8 @@ int main()
 
         if (ImGui::Button("Gerar vetor"))
         {
+            global.alert("Gerando vetor...");
+
             solver.generateVector();
         }
         if (ImGui::IsItemHovered())
@@ -93,8 +98,21 @@ int main()
         ImGui::InputInt("PPS alvo", &solver.targetSps);
         ImGui::PopItemWidth();
         if (ImGui::IsItemHovered())
-            ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \" 0 \" para definir como infinito\n\n- Apenas aplicavel quando \"Visual\" está ativado");
-
+            ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \"0\" para destravar\n\n- Apenas aplicavel quando \"Visual\" está ativado");
+        
+        ImGui::Spacing();
+        if (ImGui::TreeNode("ALGORITIMOS")| ImGuiTreeNodeFlags_DefaultOpen)
+        {
+            ImGui::Spacing();
+            if (ImGui::Button("Bubble Sort"))
+            {
+                global.alert("Ordenando o vetor...");
+                solver.bubbleSortWhole();
+            }
+            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 120));
+            ImGui::PopStyleColor();
+            ImGui::TreePop();
+        }
        
         ImGui::End();
 

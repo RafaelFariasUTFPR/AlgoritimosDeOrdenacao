@@ -17,6 +17,9 @@ public:
 
 	void process();
 
+	void bubbleSortWhole();
+	
+
 	int sps; // Steps per second
 
 	int targetSps = 30;
@@ -24,12 +27,17 @@ public:
 	bool isVisual = true;
 	int vectorSize = 10000;
 
+
 private:
 	void step();
 
 	std::vector<int> sortingVector;
 	Global* global;
 	sf::Clock deltaClock;
+	AlgorithmMaster algorithm;
+
+	
+
 
 };
 
