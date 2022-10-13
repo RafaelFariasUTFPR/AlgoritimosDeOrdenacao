@@ -48,6 +48,10 @@ int main()
         {
             solver.generateVector();
         }
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip(u8"- Gera um novo vetor com o tamanho desejado");
+
+        ImGui::Spacing();
 
         ImGui::Checkbox("Visual ", &solver.isVisual);
         if (ImGui::IsItemHovered())
