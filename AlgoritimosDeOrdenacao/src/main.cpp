@@ -1,23 +1,29 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
+
 
 #include <SFML/Graphics.hpp>
-#include "imgui/imgui.h"
-#include "imgui/imgui-SFML.h"
+#include "../imgui/imgui.h"
+#include "../imgui/imgui-SFML.h"
+
+#include "Solver.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 #define MENU_WIDTH 400
 
-bool isVisual = false;
-int vectorSize = 1000;
-int sps = 0;
 
 int main()
 {
+    srand(time(NULL)); // seed
+
+
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Algoritioms de ordenação", sf::Style::Titlebar | sf::Style::Close);
 
     ImGui::SFML::Init(window);
     
+    Solver solver;
 
     sf::Event e;
 
@@ -37,9 +43,13 @@ int main()
         ImGui::SetNextWindowSize(ImVec2(MENU_WIDTH, WINDOW_HEIGHT));
         ImGui::SetNextWindowPos(ImVec2(WINDOW_WIDTH - (MENU_WIDTH), 0));
         ImGui::Begin(u8"CONFIGURAÇÃO", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
-        ImGui::SetNextItemOpen(true);
+        
+        if (ImGui::Button("Gerar vetor"))
+        {
+            solver.generateVector();
+        }
 
-        ImGui::Checkbox("Visual ", &isVisual);
+        ImGui::Checkbox("Visual ", &solver.isVisual);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"- Uma representação visual do algoritimo\n\n- Para uma medição da performance real por favor desabilite");
         /*
@@ -57,14 +67,14 @@ int main()
         */
         ImGui::Spacing();
         ImGui::PushItemWidth(150);
-        ImGui::InputInt("Tamanho do vetor", &vectorSize);
+        ImGui::InputInt("Tamanho do vetor", &solver.vectorSize);
         ImGui::PopItemWidth();
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"- Define o tamanho do vetor a ser ordenado");
 
         ImGui::Spacing();
         ImGui::PushItemWidth(150);
-        ImGui::InputInt("PPS", &sps);
+        ImGui::InputInt("PPS", &solver.sps);
         ImGui::PopItemWidth();
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"- Define a quantidade de PASSOS POR SEGUNDO\n\n- Coloque \" 0 \" para definir como infinito\n\n- Apenas aplicavel quando \"Visual\" está ativado");
