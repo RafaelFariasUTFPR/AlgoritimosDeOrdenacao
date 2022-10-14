@@ -3,6 +3,8 @@
 #include <time.h>
 
 
+
+
 #include "Solver.h"
 #include "Global.h"
 
@@ -10,9 +12,14 @@
 
 int main()
 {
+    std::random_device rd;
+
+    std::default_random_engine generator(rd());
+
     srand(time(NULL)); // seed
 
     Global global;
+    global.generator = &generator;
 
     ImGui::SFML::Init(global.window);
     
@@ -34,7 +41,7 @@ int main()
             }
         }
 
-        //global.window.setFramerateLimit(30);
+        //global.window.setFramerateLimit(15);
         solver.process();
         double fps = 1 / global.deltaTime;
 
@@ -101,16 +108,12 @@ int main()
             ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \"0\" para destravar\n\n- Apenas aplicavel quando \"Visual\" está ativado");
         
         ImGui::Spacing();
-        if (ImGui::TreeNode("ALGORITIMOS")| ImGuiTreeNodeFlags_DefaultOpen)
+        if (ImGui::TreeNode("ALGORITIMOS"))
         {
-            ImGui::Spacing();
             if (ImGui::Button("Bubble Sort"))
             {
-                global.alert("Ordenando o vetor...");
-                solver.bubbleSortWhole();
+                solver.solveBubbleSort();
             }
-            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 120));
-            ImGui::PopStyleColor();
             ImGui::TreePop();
         }
        
@@ -119,7 +122,9 @@ int main()
 
         global.window.clear(sf::Color(sf::Color::Black));
 
+
         ImGui::SFML::Render(global.window);
+        solver.showVector();
 
         global.window.display();
 

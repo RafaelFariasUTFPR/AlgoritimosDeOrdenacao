@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <random>
 
 #include <SFML/Graphics.hpp>
 #include "../imgui/imgui.h"
@@ -18,15 +19,19 @@ public:
 	{
 		arialFont.loadFromFile("./resources/Roboto-Black.ttf");
 		message.setFont(arialFont);
-		message.setFillColor(sf::Color::White);
+		message.setFillColor(sf::Color::Red);
 		message.setCharacterSize(28);
-		message.setOutlineColor(sf::Color::Red);
-		message.setOutlineThickness(2);
+		message.setOutlineColor(sf::Color::Black);
+		message.setOutlineThickness(4);
 
 		message.setPosition(sf::Vector2f(10, 10));
+
+
 	}
 
 	void alert(std::string text);
+
+	int randomInRange(int min, int max);
 
 	double deltaTime;
 	std::string windowName;
@@ -38,7 +43,7 @@ public:
 	sf::Text message;
 
 
-
+	std::default_random_engine *generator;
 
 
 

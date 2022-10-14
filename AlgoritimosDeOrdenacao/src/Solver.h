@@ -7,6 +7,7 @@
 #include "AlgorithmMaster.h"
 #include "RandomGenerator.h"
 #include "Global.h"
+#include "BubbleSort.h"
 
 class Solver
 {
@@ -17,12 +18,15 @@ public:
 
 	void process();
 
-	void bubbleSortWhole();
+	void solveBubbleSort();
+
+	void showVector();
+
 	
 
 	int sps; // Steps per second
 
-	int targetSps = 30;
+	int targetSps = 200;
 
 	bool isVisual = true;
 	int vectorSize = 10000;
@@ -31,12 +35,27 @@ public:
 private:
 	void step();
 
-	std::vector<int> sortingVector;
+	
+	void printVector();
+
+
+	std::vector<int> sortingVector = { 1,2,3,4,5 };
 	Global* global;
 	sf::Clock deltaClock;
-	AlgorithmMaster algorithm;
 
-	
+	BubbleSort bubbleSort;
+
+
+	// 0 = None
+	// 1 = Bubble Sort
+	// 2 = Quick Sort
+	// 3 = Radix Sort
+	int stepAlgorithm = 0;
+
+	unsigned int screenWidth = WINDOW_WIDTH - MENU_WIDTH;
+
+
+
 
 
 };

@@ -7,3 +7,9 @@ void Global::alert(std::string text)
     window.draw(message);
     window.display();
 }
+
+int Global::randomInRange(int min, int max)
+{
+    std::uniform_int_distribution<int> distribution(min, max);
+    return distribution(*generator);
+}

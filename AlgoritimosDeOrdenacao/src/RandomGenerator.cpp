@@ -16,7 +16,7 @@ namespace random
 	{
 		return std::rand() % max + 1;
 	}
-	int randomIndex(int max)
+	unsigned int randomIndex(unsigned int max)
 	{
 		return std::rand() % max;
 	}

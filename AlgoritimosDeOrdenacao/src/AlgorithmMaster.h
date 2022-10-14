@@ -7,22 +7,19 @@
 class AlgorithmMaster
 {
 public:
-	AlgorithmMaster(Global &_global);
+	AlgorithmMaster();
 
-	// Retorna true se tiver organaizado
-	bool bubbleSortStep(std::vector<int>* _sortingVector);
+	virtual void solve(std::vector<int>* sortingVector){}
+	virtual bool solveStep(std::vector<int>* sortingVector) { return true; }
 
-
-	void bubbleSort(std::vector<int>* _sortingVector);
 
 	unsigned long int numberOfSteps = 0;
 
-	Global* global;
-
-private:
 	void swap(std::vector<int>* sortingVector, unsigned int firstIndex, unsigned int secondIndex);
 
+protected:
 
+	bool firstIt = true;
 
 
 };

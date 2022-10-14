@@ -12,6 +12,6 @@ namespace random
 	int randomInt(int max);
 
 	// Gera um numero inteiro entre 0 e max-1
-	int randomIndex(int max);
+	unsigned int randomIndex(unsigned int max);
 }
 
