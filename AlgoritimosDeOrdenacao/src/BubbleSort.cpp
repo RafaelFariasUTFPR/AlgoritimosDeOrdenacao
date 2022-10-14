@@ -33,6 +33,7 @@ void BubbleSort::solve()
 }
 void BubbleSort::solveTrhead(int *sps)
 {
+	isRunning = true;
 	numberOfSteps = 0;
 
 	for (int i = 0; i < sortingVector->size() - 1; i++)
@@ -54,6 +55,6 @@ void BubbleSort::solveTrhead(int *sps)
 		if (!swapped)
 			break;
 	}
-
+	isRunning = false;
 	std::cout << u8"Organizacao Finalizada\n";
 }

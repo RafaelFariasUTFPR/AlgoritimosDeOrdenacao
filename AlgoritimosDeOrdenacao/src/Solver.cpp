@@ -20,8 +20,8 @@ void Solver::generateVector()
 
 	for (long int i = 0; i < 5 * vectorSize; i++)
 	{
-		int firstIndex = global->randomInRange(0, vectorSize);
-		int secondIndex = global->randomInRange(0, vectorSize);
+		int firstIndex = global->randomInRange(0, vectorSize-1);
+		int secondIndex = global->randomInRange(0, vectorSize-1);
 
 		int auxValue = sortingVector[firstIndex];
 		sortingVector[firstIndex] = sortingVector[secondIndex];

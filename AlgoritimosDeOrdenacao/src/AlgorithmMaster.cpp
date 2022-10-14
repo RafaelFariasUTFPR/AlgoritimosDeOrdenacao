@@ -21,11 +21,13 @@ void AlgorithmMaster::spsDelay(int* sps)
 
 	while (true)
 	{
+		if (*sps <= 0)
+			return;
 		std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 
         std::chrono::duration<double, std::deca> deltaTime = b-a;
 		double delta = deltaTime.count();
-		if (delta >= 1 / ((float)*sps * 10))
+		if (delta + 1 >= 1 / ((float)*sps * 10)+1)
 			return;
 	}
 }

@@ -65,21 +65,31 @@ int main()
         ImGui::PopStyleColor();
 
         ImGui::Spacing();
-
-        if (ImGui::Button("Gerar vetor"))
+        if (!isRunning)
         {
-            global.alert("Gerando vetor...");
+            if (ImGui::Button("Gerar vetor"))
+            {
+                global.alert("Gerando vetor...");
 
-            solver.generateVector();
+                solver.generateVector();
+            }
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip(u8"- Gera um novo vetor com o tamanho desejado");
+
+            ImGui::Spacing();
+
+            ImGui::Checkbox("Visual ", &solver.isVisual);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip(u8"- Uma representação visual do algoritimo\n\n- Para uma medição da performance real por favor desabilite");
+            
+            ImGui::Spacing();
+            ImGui::PushItemWidth(150);
+            ImGui::InputInt("Tamanho do vetor", &solver.vectorSize);
+            ImGui::PopItemWidth();
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip(u8"- Define o tamanho do vetor a ser ordenado");
+
         }
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip(u8"- Gera um novo vetor com o tamanho desejado");
-
-        ImGui::Spacing();
-
-        ImGui::Checkbox("Visual ", &solver.isVisual);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip(u8"- Uma representação visual do algoritimo\n\n- Para uma medição da performance real por favor desabilite");
         /*
         if (ImGui::TreeNode("Representacao visual"))
         {
@@ -93,12 +103,6 @@ int main()
             ImGui::TreePop();
         }
         */
-        ImGui::Spacing();
-        ImGui::PushItemWidth(150);
-        ImGui::InputInt("Tamanho do vetor", &solver.vectorSize);
-        ImGui::PopItemWidth();
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip(u8"- Define o tamanho do vetor a ser ordenado");
 
         ImGui::Spacing();
         ImGui::PushItemWidth(150);
@@ -106,16 +110,34 @@ int main()
         ImGui::PopItemWidth();
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \"0\" para destravar\n\n- Apenas aplicavel quando \"Visual\" está ativado");
-        
+       
         ImGui::Spacing();
-        if (ImGui::TreeNode("ALGORITIMOS"))
+
+        if (!isRunning)
         {
-            if (ImGui::Button("Bubble Sort"))
+            if (ImGui::TreeNode("ALGORITIMOS"))
             {
-                solver.solveBubbleSort();
+                if (ImGui::IsItemHovered())
+                    ImGui::SetTooltip(u8"- Seleciona o algoritimo que será usado para ordenar o vetor");
+
+                if (ImGui::Button("Bubble Sort"))
+                {
+                    solver.solveBubbleSort();
+                }
+                ImGui::TreePop();
             }
-            ImGui::TreePop();
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip(u8"- Seleciona o algoritimo que será usado para ordenar o vetor");
+
+
         }
+
+        if (isRunning)
+        {
+            ImGui::Text("Ordenando vetor de tamanho: %i", solver.vectorSize);
+            ImGui::TextColored(ImVec4(1, 1, 0.3, 1), "Executando algoritimo...");
+        }
+
        
         ImGui::End();
 

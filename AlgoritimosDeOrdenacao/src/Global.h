@@ -11,6 +11,7 @@
 #define WINDOW_HEIGHT 720
 #define MENU_WIDTH 300
 
+extern bool isRunning;
 
 class Global
 {

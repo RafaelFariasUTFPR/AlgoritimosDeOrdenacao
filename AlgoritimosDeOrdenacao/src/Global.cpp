@@ -1,5 +1,6 @@
 #include "Global.h"
 
+bool isRunning = false;
 
 void Global::alert(std::string text)
 {
