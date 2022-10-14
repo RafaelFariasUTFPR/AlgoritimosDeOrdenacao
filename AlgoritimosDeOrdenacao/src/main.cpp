@@ -123,8 +123,8 @@ int main()
         global.window.clear(sf::Color(sf::Color::Black));
 
 
-        ImGui::SFML::Render(global.window);
         solver.showVector();
+        ImGui::SFML::Render(global.window);
 
         global.window.display();
 

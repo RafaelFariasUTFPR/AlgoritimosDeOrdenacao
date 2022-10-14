@@ -1,19 +1,16 @@
 #pragma once
 #include "AlgorithmMaster.h"
-#include <thread>
 
-void threadedSort(std::vector<int>* sortingVector);
 
 class BubbleSort :
     public AlgorithmMaster
 {
 public:
-    BubbleSort();
+    BubbleSort(std::vector<int>* _sortingVector);
 
-    void solve(std::vector<int>* sortingVector) override;
-    bool solveStep(std::vector<int>* sortingVector) override;
-    bool solveStepa(std::vector<int>* sortingVector);
-
+    void solve() override;
+    void solveTrhead(int* sps) override;
+    
 private:
     int i = 0;
     int j = 0;

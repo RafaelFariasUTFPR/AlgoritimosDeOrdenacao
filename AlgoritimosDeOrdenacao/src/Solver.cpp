@@ -1,6 +1,6 @@
 #include "Solver.h"
 
-Solver::Solver(Global &_global)
+Solver::Solver(Global &_global) : bubbleSort(&sortingVector)
 {
 	global = &_global;
 	
@@ -38,6 +38,8 @@ void Solver::process()
 {
 	if (deltaClock.getElapsedTime().asSeconds() >= 1/ (double)targetSps || targetSps == 0)
 		step();
+
+
 }
 
 void Solver::solveBubbleSort()
@@ -49,11 +51,13 @@ void Solver::solveBubbleSort()
 	{
 		global->alert("Ordenando o vetor...");
 
-		bubbleSort.solve(&sortingVector);
+		bubbleSort.solve();
 		std::cout << "Passos: " << bubbleSort.numberOfSteps << std::endl;
 	}
 	else
-		stepAlgorithm = 1;
+	{
+		std::thread(threadBubble, &bubbleSort, &targetSps).detach();
+	}
 }
 
 
@@ -71,23 +75,7 @@ void Solver::step()
 	sps = ceil(1 / deltaClock.getElapsedTime().asSeconds());
 	deltaClock.restart();
 
-	switch (stepAlgorithm)
-	{
-	case 1:
-		//global->alert("Ordenando o vetor...");
 
-		if (bubbleSort.solveStep(&sortingVector))
-		{
-			stepAlgorithm = 0;
-			std::cout << "Passos: " << bubbleSort.numberOfSteps << std::endl;
-
-		}
-		stepAlgorithm = 0;
-		break;
-
-	default:
-		break;
-	}
 
 }
 
@@ -115,4 +103,12 @@ void Solver::showVector()
 
 	}
 	global->window.draw(linesArray);
+}
+
+
+
+
+void threadBubble(BubbleSort* bubbleSort, int *sps)
+{
+	bubbleSort->solveTrhead(sps);
 }

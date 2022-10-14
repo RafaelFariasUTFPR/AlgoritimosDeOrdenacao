@@ -3,11 +3,14 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <thread>
 
 #include "AlgorithmMaster.h"
 #include "RandomGenerator.h"
 #include "Global.h"
 #include "BubbleSort.h"
+
+void threadBubble(BubbleSort *bubbleSort, int* sps);
 
 class Solver
 {
@@ -22,7 +25,6 @@ public:
 
 	void showVector();
 
-	
 
 	int sps; // Steps per second
 
@@ -56,7 +58,6 @@ private:
 
 
 
-
-
+	bool doOnce = true;
 };
 

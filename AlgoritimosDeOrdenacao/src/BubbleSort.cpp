@@ -1,33 +1,14 @@
 #include "BubbleSort.h"
 
 
-BubbleSort::BubbleSort()
+BubbleSort::BubbleSort(std::vector<int>* _sortingVector) : AlgorithmMaster(_sortingVector)
 {
 
 }
 
-void threadedSort(std::vector<int>* sortingVector)
-{
 
-	for (int i = 0; i < sortingVector->size() - 1; i++)
-	{
-		bool swapped = false;
-		for (int j = 0; j < sortingVector->size() - 1; j++)
-		{
-			if (sortingVector->at(j) > sortingVector->at(j + 1))
-			{
-				
-				AlgorithmMaster().swap(sortingVector, j, j + 1);
-				swapped = true;
 
-			}
-		}
-		if (!swapped)
-			break;
-	}
-}
-
-void BubbleSort::solve(std::vector<int>* sortingVector)
+void BubbleSort::solve()
 {
 	numberOfSteps = 0;
 
@@ -47,27 +28,17 @@ void BubbleSort::solve(std::vector<int>* sortingVector)
 		if (!swapped)
 			break;
 	}
+	std::cout << u8"Organizacao Finalizada\n";
 
 }
-bool BubbleSort::solveStep(std::vector<int>* sortingVector)
+void BubbleSort::solveTrhead(int *sps)
 {
-	std::thread(threadedSort, sortingVector).detach();
-}
-bool BubbleSort::solveStepa(std::vector<int>* sortingVector)
-{
-	if (firstIt)
-	{
-		i = 0;
-		j = 0;
-		numberOfSteps = 0;
-		swapped = false;
-		firstIt = false;
-	}
+	numberOfSteps = 0;
 
-	if (i < sortingVector->size() - 1)
+	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
-		
-		if (j < sortingVector->size() - 1)
+		bool swapped = false;
+		for (int j = 0; j < sortingVector->size() - 1; j++)
 		{
 			numberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
@@ -76,20 +47,13 @@ bool BubbleSort::solveStepa(std::vector<int>* sortingVector)
 				swapped = true;
 
 			}
-			j++;
-			return false;
+			//std::cout << sps << std::endl;
+			if(*sps > 0)
+				spsDelay(sps);
 		}
-
 		if (!swapped)
-		{
-			firstIt = true;
-			return true;
-		}
-		j = 0;
-		i++;
-		swapped = false;
-		return false;
+			break;
 	}
-	firstIt = true;
-	return true;
+
+	std::cout << u8"Organizacao Finalizada\n";
 }

@@ -1,24 +1,27 @@
 #pragma once
 
 #include <vector>
+#include <chrono>
 
 #include "Global.h"
 
 class AlgorithmMaster
 {
 public:
-	AlgorithmMaster();
+	AlgorithmMaster(std::vector<int>* _sortingVector);
 
-	virtual void solve(std::vector<int>* sortingVector){}
-	virtual bool solveStep(std::vector<int>* sortingVector) { return true; }
+	virtual void solve(){}
+	virtual void solveTrhead(int *sps){}
 
 
 	unsigned long int numberOfSteps = 0;
 
-	void swap(std::vector<int>* sortingVector, unsigned int firstIndex, unsigned int secondIndex);
 
 protected:
+	void swap(std::vector<int>* sortingVector, unsigned int firstIndex, unsigned int secondIndex);
+	void spsDelay(int* sps);
 
+	std::vector<int>* sortingVector;
 	bool firstIt = true;
 
 
