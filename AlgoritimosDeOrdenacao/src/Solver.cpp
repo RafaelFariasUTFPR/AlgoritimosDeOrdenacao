@@ -76,6 +76,8 @@ void Solver::step()
 		sps = (int)(1 / (deltaDecaSps * 10));
 	deltaClock.restart();
 
+	std::cout << lastNumberOfSteps << std::endl;
+
 	
 
 

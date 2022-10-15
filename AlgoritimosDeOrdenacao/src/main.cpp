@@ -153,7 +153,7 @@ int main()
 
         ImGui::Text(u8"Numero de passos:");
         ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%i", lastNumberOfSteps);
+        ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%lu", lastNumberOfSteps);
 
         ImGui::EndListBox();
 

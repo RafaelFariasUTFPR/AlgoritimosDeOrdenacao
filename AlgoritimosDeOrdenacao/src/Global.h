@@ -13,7 +13,7 @@
 
 extern bool isRunning;
 extern float lastExecutionTime;
-extern int lastNumberOfSteps;
+extern unsigned long int lastNumberOfSteps;
 extern double deltaDecaSps;
 
 class Global
