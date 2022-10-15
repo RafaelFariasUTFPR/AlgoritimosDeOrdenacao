@@ -25,9 +25,30 @@ void AlgorithmMaster::spsDelay(int* sps)
 			return;
 		std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 
-        std::chrono::duration<double, std::deca> deltaTime = b-a;
-		double delta = deltaTime.count();
-		if (delta + 1 >= 1 / ((float)*sps * 10)+1)
+        std::chrono::duration<long float, std::deca> deltaTime = b-a;
+		deltaDecaSps = deltaTime.count();
+
+		if (deltaDecaSps + 1 >= 1 / ((float)*sps * 10)+1)
 			return;
 	}
+}
+
+void AlgorithmMaster::startSort()
+{
+	isRunning = true;
+	lastNumberOfSteps = 0;
+	initialTime = std::chrono::system_clock::now();
+
+}
+
+void AlgorithmMaster::finishSort()
+{
+	endTime = std::chrono::system_clock::now();
+
+	std::chrono::duration<double, std::milli> deltaTime = endTime - initialTime;
+
+	lastExecutionTime = deltaTime.count();
+
+	isRunning = false;
+	std::cout << u8"Organizacao Finalizada\n";
 }

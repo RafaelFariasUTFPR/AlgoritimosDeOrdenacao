@@ -26,7 +26,7 @@ public:
 	void showVector();
 
 
-	int sps; // Steps per second
+	unsigned int sps = 0; // Steps per second
 
 	int targetSps = 200;
 

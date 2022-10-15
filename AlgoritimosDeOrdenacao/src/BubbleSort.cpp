@@ -10,14 +10,14 @@ BubbleSort::BubbleSort(std::vector<int>* _sortingVector) : AlgorithmMaster(_sort
 
 void BubbleSort::solve()
 {
-	numberOfSteps = 0;
+	startSort();
 
 	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
 		bool swapped = false;
 		for (int j = 0; j < sortingVector->size() - 1; j++)
 		{
-			numberOfSteps++;
+			lastNumberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
 			{
 				swap(sortingVector, j, j + 1);
@@ -28,33 +28,34 @@ void BubbleSort::solve()
 		if (!swapped)
 			break;
 	}
-	std::cout << u8"Organizacao Finalizada\n";
+	finishSort();
 
 }
 void BubbleSort::solveTrhead(int *sps)
 {
-	isRunning = true;
-	numberOfSteps = 0;
-
+	startSort();
 	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
 		bool swapped = false;
 		for (int j = 0; j < sortingVector->size() - 1; j++)
 		{
-			numberOfSteps++;
+			lastNumberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
 			{
 				swap(sortingVector, j, j + 1);
 				swapped = true;
-
 			}
-			//std::cout << sps << std::endl;
-			if(*sps > 0)
+			if (*sps > 0)
+			{
 				spsDelay(sps);
+			}
+			
+				
 		}
 		if (!swapped)
 			break;
 	}
-	isRunning = false;
-	std::cout << u8"Organizacao Finalizada\n";
+	
+	finishSort();
+
 }

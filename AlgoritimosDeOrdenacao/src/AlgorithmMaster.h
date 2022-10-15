@@ -21,8 +21,14 @@ protected:
 	void swap(std::vector<int>* sortingVector, unsigned int firstIndex, unsigned int secondIndex);
 	void spsDelay(int* sps);
 
+	void startSort();
+	void finishSort();
+
 	std::vector<int>* sortingVector;
 	bool firstIt = true;
+
+	std::chrono::system_clock::time_point initialTime;
+	std::chrono::system_clock::time_point endTime;
 
 
 };

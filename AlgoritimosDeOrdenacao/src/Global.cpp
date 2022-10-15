@@ -1,6 +1,9 @@
 #include "Global.h"
 
 bool isRunning = false;
+float lastExecutionTime = 0.0;
+int lastNumberOfSteps = 0;
+double deltaDecaSps = 0;
 
 void Global::alert(std::string text)
 {

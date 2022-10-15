@@ -57,8 +57,12 @@ int main()
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"- Frames por segundo");
 
+
         ImGui::SameLine(110);
-        ImGui::Text("PPS: %i", solver.sps);
+        if(solver.targetSps == 0)
+            ImGui::Text("PPS: Destravado");
+        else
+            ImGui::Text("PPS: %li", solver.sps);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"Passos por segundo");
 
@@ -119,7 +123,6 @@ int main()
             {
                 if (ImGui::IsItemHovered())
                     ImGui::SetTooltip(u8"- Seleciona o algoritimo que será usado para ordenar o vetor");
-
                 if (ImGui::Button("Bubble Sort"))
                 {
                     solver.solveBubbleSort();
@@ -137,8 +140,27 @@ int main()
             ImGui::Text("Ordenando vetor de tamanho: %i", solver.vectorSize);
             ImGui::TextColored(ImVec4(1, 1, 0.3, 1), "Executando algoritimo...");
         }
+        ImGui::Spacing();
+        ImGui::Spacing();
 
-       
+        ImGui::Text(u8"RESULTADO ANTERIOR");
+
+        ImGui::BeginListBox("", ImVec2(MENU_WIDTH-15, 50));
+
+        ImGui::Text(u8"Tempo de execução:");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%f ms", lastExecutionTime);
+
+        ImGui::Text(u8"Numero de passos:");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%i", lastNumberOfSteps);
+
+        ImGui::EndListBox();
+
+
+
+
+
         ImGui::End();
 
 

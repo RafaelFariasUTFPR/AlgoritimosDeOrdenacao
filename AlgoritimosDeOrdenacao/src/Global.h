@@ -12,6 +12,9 @@
 #define MENU_WIDTH 300
 
 extern bool isRunning;
+extern float lastExecutionTime;
+extern int lastNumberOfSteps;
+extern double deltaDecaSps;
 
 class Global
 {

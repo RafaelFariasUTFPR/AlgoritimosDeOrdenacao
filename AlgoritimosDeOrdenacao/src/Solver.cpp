@@ -36,7 +36,7 @@ void Solver::generateVector()
 
 void Solver::process()
 {
-	if (deltaClock.getElapsedTime().asSeconds() >= 1/ (double)targetSps || targetSps == 0)
+	if (deltaClock.getElapsedTime().asSeconds() >= 0.3)
 		step();
 
 
@@ -72,9 +72,11 @@ void Solver::printVector()
 
 void Solver::step()
 {
-	sps = ceil(1 / deltaClock.getElapsedTime().asSeconds());
+	if(deltaDecaSps != 0)
+		sps = (int)(1 / (deltaDecaSps * 10));
 	deltaClock.restart();
 
+	
 
 
 }
