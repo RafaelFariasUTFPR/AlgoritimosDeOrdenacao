@@ -13,7 +13,11 @@ Solver::Solver(Global &_global) : bubbleSort(&sortingVector) , quickSort(&sortin
 void Solver::generateVector()
 {
 	isGenerating = true;
+	
+	
 	std::thread(threadGenerate, &sortingVector, global, vectorSize).detach();
+	
+
 }
 
 void Solver::process()
@@ -119,9 +123,6 @@ void Solver::showVector()
 	global->window.draw(linesArray);
 }
 
-
-
-
 void threadSolve(AlgorithmMaster* algorithm)
 {
 	algorithm->solveTrhead();
@@ -137,17 +138,11 @@ void threadGenerate(std::vector<int>* sortingVector, Global* global, int vectorS
 	for (int i = 0; i < vectorSize; i++)
 		sortingVector->push_back(i);
 
+
+	*sortingVector = global->shuffleVector(*sortingVector);
+
 	isGenerating = false;
 
-	for (unsigned int i = 0; i < 5 * vectorSize; i++)
-	{
-		unsigned int firstIndex = global->randomInRange(0, vectorSize - 1);
-		unsigned int secondIndex = global->randomInRange(0, vectorSize - 1);
-
-		unsigned int auxValue = sortingVector->at(firstIndex);
-		sortingVector->at(firstIndex) = sortingVector->at(secondIndex);
-		sortingVector->at(secondIndex) = auxValue;
-	}
 
 	isRandomizing = false;
 

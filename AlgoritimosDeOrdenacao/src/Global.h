@@ -40,6 +40,7 @@ public:
 	void alert(std::string text);
 
 	int randomInRange(int min, int max);
+	std::vector <int> shuffleVector(std::vector <int> sortingVector);
 
 	double deltaTime;
 	std::string windowName;
