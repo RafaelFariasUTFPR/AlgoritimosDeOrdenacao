@@ -57,31 +57,22 @@ void QuickSort::recursiveQuickSortThread(int low, int high)
 
 int QuickSort::partition(int low, int high)
 {
-    // select the rightmost element as pivot
     int pivot = sortingVector->at(high);
 
-    // pointer for greater element
     int i = (low - 1);
 
-    // traverse each element of the array
-    // compare them with the pivot
     for (int j = low; j < high; j++) {
         spsDelay();
 
         if (sortingVector->at(j) <= pivot) {
 
-            // if element smaller than pivot is found
-            // swap it with the greater element pointed by i
             i++;
 
-            // swap element at i with element at j
             swap(i, j);
         }
     }
 
-    // swap pivot with the greater element at i
     swap(i + 1, high);
 
-    // return the partition point
     return (i + 1);
 }

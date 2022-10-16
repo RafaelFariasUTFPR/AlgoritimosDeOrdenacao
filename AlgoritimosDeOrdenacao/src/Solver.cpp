@@ -1,11 +1,12 @@
 #include "Solver.h"
 
-Solver::Solver(Global &_global) : bubbleSort(&sortingVector) , quickSort(&sortingVector)
+Solver::Solver(Global &_global) : bubbleSort(&sortingVector) , quickSort(&sortingVector), countingSort(&sortingVector)
 {
 	global = &_global;
 
 	bubbleSort.sps = &targetSps;
 	quickSort.sps = &targetSps;
+	countingSort.sps = &targetSps;
 	
 }
 
@@ -54,6 +55,23 @@ void Solver::solveQuickSort()
 	else
 	{
 		std::thread(threadSolve, &quickSort).detach();
+	}
+}
+
+void Solver::solveCountingSort()
+{
+	if (!sortingVector.size())
+		return;
+
+	if (!isVisual)
+	{
+		global->alert("Ordenando o vetor...");
+
+		countingSort.solve();
+	}
+	else
+	{
+		std::thread(threadSolve, &countingSort).detach();
 	}
 }
 
@@ -117,16 +135,16 @@ void threadGenerate(std::vector<int>* sortingVector, Global* global, int vectorS
 
 	sortingVector->resize(0);
 	for (int i = 0; i < vectorSize; i++)
-		sortingVector->push_back(i + 1);
+		sortingVector->push_back(i);
 
 	isGenerating = false;
 
-	for (long int i = 0; i < 5 * vectorSize; i++)
+	for (unsigned int i = 0; i < 5 * vectorSize; i++)
 	{
-		int firstIndex = global->randomInRange(0, vectorSize - 1);
-		int secondIndex = global->randomInRange(0, vectorSize - 1);
+		unsigned int firstIndex = global->randomInRange(0, vectorSize - 1);
+		unsigned int secondIndex = global->randomInRange(0, vectorSize - 1);
 
-		int auxValue = sortingVector->at(firstIndex);
+		unsigned int auxValue = sortingVector->at(firstIndex);
 		sortingVector->at(firstIndex) = sortingVector->at(secondIndex);
 		sortingVector->at(secondIndex) = auxValue;
 	}

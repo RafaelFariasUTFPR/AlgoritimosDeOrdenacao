@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CountingSort.cpp" />
     <ClCompile Include="src\QuickSort.cpp" />
     <ClCompile Include="src\BubbleSort.cpp" />
     <ClCompile Include="src\Global.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="src\Solver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CountingSort.h" />
     <ClInclude Include="src\QuickSort.h" />
     <ClInclude Include="src\BubbleSort.h" />
     <ClInclude Include="src\Global.h" />

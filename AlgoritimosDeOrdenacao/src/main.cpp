@@ -3,8 +3,6 @@
 #include <time.h>
 
 
-
-
 #include "Solver.h"
 #include "Global.h"
 
@@ -98,19 +96,6 @@ int main()
                     ImGui::SetTooltip(u8"- Define o tamanho do vetor a ser ordenado");
 
             }
-            /*
-            if (ImGui::TreeNode("Representacao visual"))
-            {
-                ImGui::Spacing();
-                ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 120));
-                ImGui::TextWrapped("Uma representacao visual do algoritimo, para uma medicao da performance real por favor desabilite\n\n");
-                ImGui::PopStyleColor();
-                ImGui::Checkbox("Visual ", &isVisual);
-                if (ImGui::IsItemHovered())
-                    ImGui::SetTooltip(u8"Uma representação visual do algoritimo\nPara uma medição da performance real por favor desabilite");
-                ImGui::TreePop();
-            }
-            */
 
             ImGui::Spacing();
             ImGui::PushItemWidth(150);
@@ -135,10 +120,12 @@ int main()
                     {
                         solver.solveQuickSort();
                     }
+                    if (ImGui::Button("Counting Sort"))
+                    {
+                        solver.solveCountingSort();
+                    }
                     ImGui::TreePop();
                 }
-
-
             }
         }
         
@@ -172,15 +159,9 @@ int main()
 
         ImGui::EndListBox();
 
-
-
-
-
         ImGui::End();
 
-
         global.window.clear(sf::Color(sf::Color::Black));
-
 
         solver.showVector();
         ImGui::SFML::Render(global.window);

@@ -8,8 +8,10 @@
 #include "AlgorithmMaster.h"
 #include "RandomGenerator.h"
 #include "Global.h"
+
 #include "BubbleSort.h"
 #include "QuickSort.h"
+#include "CountingSort.h"
 
 void threadSolve(AlgorithmMaster* algorithm);
 void threadGenerate(std::vector<int>* sortingVector, Global* global, int vectorSize);
@@ -24,18 +26,18 @@ public:
 	void process();
 
 	void solveBubbleSort();
-
 	void solveQuickSort();
+	void solveCountingSort();
 
 	void showVector();
 
 
 	unsigned int sps = 0; // Steps per second
 
-	int targetSps = 200;
+	int targetSps = 4000;
 
 	bool isVisual = true;
-	int vectorSize = 10000;
+	int vectorSize = 1000;
 
 
 private:
@@ -51,6 +53,7 @@ private:
 
 	BubbleSort bubbleSort;
 	QuickSort quickSort;
+	CountingSort countingSort;
 
 
 	// 0 = None
