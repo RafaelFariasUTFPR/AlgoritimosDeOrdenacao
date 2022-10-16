@@ -20,7 +20,7 @@ void BubbleSort::solve()
 			lastNumberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
 			{
-				swap(sortingVector, j, j + 1);
+				swap(j, j + 1);
 				swapped = true;
 				
 			}
@@ -31,7 +31,7 @@ void BubbleSort::solve()
 	finishSort();
 
 }
-void BubbleSort::solveTrhead(int *sps)
+void BubbleSort::solveTrhead()
 {
 	startSort();
 	for (int i = 0; i < sortingVector->size() - 1; i++)
@@ -42,13 +42,12 @@ void BubbleSort::solveTrhead(int *sps)
 			lastNumberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
 			{
-				swap(sortingVector, j, j + 1);
+				swap(j, j + 1);
 				swapped = true;
 			}
-			if (*sps > 0)
-			{
-				spsDelay(sps);
-			}
+
+			spsDelay();
+		
 			
 				
 		}

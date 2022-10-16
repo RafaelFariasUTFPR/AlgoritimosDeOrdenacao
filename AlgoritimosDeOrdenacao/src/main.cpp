@@ -127,10 +127,12 @@ int main()
                 {
                     solver.solveBubbleSort();
                 }
+                if (ImGui::Button("Quick Sort"))
+                {
+                    solver.solveQuickSort();
+                }
                 ImGui::TreePop();
             }
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip(u8"- Seleciona o algoritimo que será usado para ordenar o vetor");
 
 
         }

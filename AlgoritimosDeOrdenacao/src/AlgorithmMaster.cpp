@@ -7,7 +7,7 @@ AlgorithmMaster::AlgorithmMaster(std::vector<int>* _sortingVector)
 }
 
 
-void AlgorithmMaster::swap(std::vector<int>* sortingVector, unsigned int firstIndex, unsigned int secondIndex)
+void AlgorithmMaster::swap(unsigned int firstIndex, unsigned int secondIndex)
 {
 	int varAux = sortingVector->at(firstIndex);
 	sortingVector->at(firstIndex) = sortingVector->at(secondIndex);
@@ -15,8 +15,22 @@ void AlgorithmMaster::swap(std::vector<int>* sortingVector, unsigned int firstIn
 
 }
 
-void AlgorithmMaster::spsDelay(int* sps)
+void AlgorithmMaster::threadedSwap(unsigned int firstIndex, unsigned int secondIndex)
 {
+	int varAux = sortingVector->at(firstIndex);
+	sortingVector->at(firstIndex) = sortingVector->at(secondIndex);
+	sortingVector->at(secondIndex) = varAux;
+
+	spsDelay();
+
+}
+
+void AlgorithmMaster::spsDelay()
+{
+	if (*sps == 0)
+	{
+		return;
+	}
 	std::chrono::system_clock::time_point a = std::chrono::system_clock::now();
 
 	while (true)

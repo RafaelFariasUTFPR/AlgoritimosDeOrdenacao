@@ -3,6 +3,7 @@
 #include <vector>
 #include <chrono>
 
+
 #include "Global.h"
 
 class AlgorithmMaster
@@ -11,15 +12,16 @@ public:
 	AlgorithmMaster(std::vector<int>* _sortingVector);
 
 	virtual void solve(){}
-	virtual void solveTrhead(int *sps){}
+	virtual void solveTrhead(){}
 
 
-	unsigned long int numberOfSteps = 0;
-
+	int* sps;
 
 protected:
-	void swap(std::vector<int>* sortingVector, unsigned int firstIndex, unsigned int secondIndex);
-	void spsDelay(int* sps);
+	void swap(unsigned int firstIndex, unsigned int secondIndex);
+	void threadedSwap(unsigned int firstIndex, unsigned int secondIndex);
+
+	void spsDelay();
 
 	void startSort();
 	void finishSort();

@@ -106,6 +106,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\include;$(SolutionDir)\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\QuickSort.cpp" />
     <ClCompile Include="src\BubbleSort.cpp" />
     <ClCompile Include="src\Global.cpp" />
     <ClCompile Include="src\RandomGenerator.cpp" />
@@ -164,6 +166,7 @@
     <ClCompile Include="src\Solver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\QuickSort.h" />
     <ClInclude Include="src\BubbleSort.h" />
     <ClInclude Include="src\Global.h" />
     <ClInclude Include="src\RandomGenerator.h" />

@@ -9,11 +9,9 @@ public:
     BubbleSort(std::vector<int>* _sortingVector);
 
     void solve() override;
-    void solveTrhead(int* sps) override;
+    void solveTrhead() override;
     
 private:
-    int i = 0;
-    int j = 0;
     bool swapped = false;
 };
 

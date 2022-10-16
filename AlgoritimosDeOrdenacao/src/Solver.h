@@ -9,8 +9,9 @@
 #include "RandomGenerator.h"
 #include "Global.h"
 #include "BubbleSort.h"
+#include "QuickSort.h"
 
-void threadBubble(BubbleSort *bubbleSort, int* sps);
+void threadSolve(AlgorithmMaster* algorithm);
 
 class Solver
 {
@@ -22,6 +23,8 @@ public:
 	void process();
 
 	void solveBubbleSort();
+
+	void solveQuickSort();
 
 	void showVector();
 
@@ -46,6 +49,7 @@ private:
 	sf::Clock deltaClock;
 
 	BubbleSort bubbleSort;
+	QuickSort quickSort;
 
 
 	// 0 = None
