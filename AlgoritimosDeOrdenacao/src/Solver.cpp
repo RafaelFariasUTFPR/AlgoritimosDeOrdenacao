@@ -11,30 +11,8 @@ Solver::Solver(Global &_global) : bubbleSort(&sortingVector) , quickSort(&sortin
 
 void Solver::generateVector()
 {
-	std::cout << "Gerando vetor...\n";
-
-
-
-	sortingVector.resize(vectorSize);
-	for (int i = 0; i < vectorSize; i++)
-		sortingVector.at(i) = i + 1;
-	
-	
-
-	for (long int i = 0; i < 5 * vectorSize; i++)
-	{
-		int firstIndex = global->randomInRange(0, vectorSize-1);
-		int secondIndex = global->randomInRange(0, vectorSize-1);
-
-		int auxValue = sortingVector[firstIndex];
-		sortingVector[firstIndex] = sortingVector[secondIndex];
-		sortingVector[secondIndex] = auxValue;
-	}
-
-
-
-	std::cout << "Vetor gerado!\n";
-
+	isGenerating = true;
+	std::thread(threadGenerate, &sortingVector, global, vectorSize).detach();
 }
 
 void Solver::process()
@@ -94,13 +72,12 @@ void Solver::step()
 	if(deltaDecaSps != 0)
 		sps = (int)(1 / (deltaDecaSps * 10));
 	deltaClock.restart();
-
-
 }
 
 void Solver::showVector()
 {
-
+	if (isGenerating)
+		return;
 	long double vectorShowSize = screenWidth / sortingVector.size();
 	std::vector<float> showVector;
 	for (int i = 0; i < screenWidth; i++)
@@ -130,4 +107,32 @@ void Solver::showVector()
 void threadSolve(AlgorithmMaster* algorithm)
 {
 	algorithm->solveTrhead();
+}
+
+void threadGenerate(std::vector<int>* sortingVector, Global* global, int vectorSize)
+{
+	std::cout << "Gerando vetor...\n";
+
+	isRandomizing = true;
+
+	sortingVector->resize(0);
+	for (int i = 0; i < vectorSize; i++)
+		sortingVector->push_back(i + 1);
+
+	isGenerating = false;
+
+	for (long int i = 0; i < 5 * vectorSize; i++)
+	{
+		int firstIndex = global->randomInRange(0, vectorSize - 1);
+		int secondIndex = global->randomInRange(0, vectorSize - 1);
+
+		int auxValue = sortingVector->at(firstIndex);
+		sortingVector->at(firstIndex) = sortingVector->at(secondIndex);
+		sortingVector->at(secondIndex) = auxValue;
+	}
+
+	isRandomizing = false;
+
+
+	std::cout << "Vetor gerado!\n";
 }

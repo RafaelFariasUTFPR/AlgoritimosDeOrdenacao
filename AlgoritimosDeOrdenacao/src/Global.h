@@ -12,6 +12,10 @@
 #define MENU_WIDTH 300
 
 extern bool isRunning;
+extern bool isGenerating;
+extern bool isRandomizing;
+
+
 extern float lastExecutionTime;
 extern unsigned long int lastNumberOfSteps;
 extern double deltaDecaSps;

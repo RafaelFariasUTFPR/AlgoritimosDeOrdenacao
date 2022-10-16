@@ -12,6 +12,7 @@
 #include "QuickSort.h"
 
 void threadSolve(AlgorithmMaster* algorithm);
+void threadGenerate(std::vector<int>* sortingVector, Global* global, int vectorSize);
 
 class Solver
 {

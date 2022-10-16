@@ -1,6 +1,10 @@
 #include "Global.h"
 
 bool isRunning = false;
+bool isGenerating = false;
+bool isRandomizing = false;
+
+
 float lastExecutionTime = 0.0;
 unsigned long int lastNumberOfSteps = 0;
 double deltaDecaSps = 0;

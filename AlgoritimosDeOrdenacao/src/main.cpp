@@ -69,73 +69,86 @@ int main()
         ImGui::PopStyleColor();
 
         ImGui::Spacing();
-        if (!isRunning)
+        
+        if (!isRandomizing)
         {
-            if (ImGui::Button("Gerar vetor"))
+            if (!isRunning)
             {
-                global.alert("Gerando vetor...");
+                if (ImGui::Button("Gerar vetor"))
+                {
+                    global.alert("Gerando vetor...");
 
-                solver.generateVector();
-            }
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip(u8"- Gera um novo vetor com o tamanho desejado");
-
-            ImGui::Spacing();
-
-            ImGui::Checkbox("Visual ", &solver.isVisual);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip(u8"- Uma representação visual do algoritimo\n\n- Para uma medição da performance real por favor desabilite");
-            
-            ImGui::Spacing();
-            ImGui::PushItemWidth(150);
-            ImGui::InputInt("Tamanho do vetor", &solver.vectorSize);
-            ImGui::PopItemWidth();
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip(u8"- Define o tamanho do vetor a ser ordenado");
-
-        }
-        /*
-        if (ImGui::TreeNode("Representacao visual"))
-        {
-            ImGui::Spacing();
-            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 120));
-            ImGui::TextWrapped("Uma representacao visual do algoritimo, para uma medicao da performance real por favor desabilite\n\n");
-            ImGui::PopStyleColor();
-            ImGui::Checkbox("Visual ", &isVisual);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip(u8"Uma representação visual do algoritimo\nPara uma medição da performance real por favor desabilite");
-            ImGui::TreePop();
-        }
-        */
-
-        ImGui::Spacing();
-        ImGui::PushItemWidth(150);
-        ImGui::InputInt("PPS alvo", &solver.targetSps);
-        ImGui::PopItemWidth();
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \"0\" para destravar\n\n- Apenas aplicavel quando \"Visual\" está ativado");
-       
-        ImGui::Spacing();
-
-        if (!isRunning)
-        {
-            if (ImGui::TreeNode("ALGORITIMOS"))
-            {
+                    solver.generateVector();
+                }
                 if (ImGui::IsItemHovered())
-                    ImGui::SetTooltip(u8"- Seleciona o algoritimo que será usado para ordenar o vetor");
-                if (ImGui::Button("Bubble Sort"))
-                {
-                    solver.solveBubbleSort();
-                }
-                if (ImGui::Button("Quick Sort"))
-                {
-                    solver.solveQuickSort();
-                }
+                    ImGui::SetTooltip(u8"- Gera um novo vetor com o tamanho desejado");
+
+                ImGui::Spacing();
+
+                ImGui::Checkbox("Visual ", &solver.isVisual);
+                if (ImGui::IsItemHovered())
+                    ImGui::SetTooltip(u8"- Uma representação visual do algoritimo\n\n- Para uma medição da performance real por favor desabilite");
+
+                ImGui::Spacing();
+                ImGui::PushItemWidth(150);
+
+                ImGui::InputInt("Tamanho do vetor", &solver.vectorSize);
+                ImGui::PopItemWidth();
+                if (ImGui::IsItemHovered())
+                    ImGui::SetTooltip(u8"- Define o tamanho do vetor a ser ordenado");
+
+            }
+            /*
+            if (ImGui::TreeNode("Representacao visual"))
+            {
+                ImGui::Spacing();
+                ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 120));
+                ImGui::TextWrapped("Uma representacao visual do algoritimo, para uma medicao da performance real por favor desabilite\n\n");
+                ImGui::PopStyleColor();
+                ImGui::Checkbox("Visual ", &isVisual);
+                if (ImGui::IsItemHovered())
+                    ImGui::SetTooltip(u8"Uma representação visual do algoritimo\nPara uma medição da performance real por favor desabilite");
                 ImGui::TreePop();
             }
+            */
+
+            ImGui::Spacing();
+            ImGui::PushItemWidth(150);
+            ImGui::InputInt("PPS alvo", &solver.targetSps);
+            ImGui::PopItemWidth();
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip(u8"- Define a quantidade alvo de PASSOS POR SEGUNDO\n\n- Coloque \"0\" para destravar\n\n- Apenas aplicavel quando \"Visual\" está ativado");
+
+            ImGui::Spacing();
+
+            if (!isRunning)
+            {
+                if (ImGui::TreeNode("ALGORITIMOS"))
+                {
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip(u8"- Seleciona o algoritimo que será usado para ordenar o vetor");
+                    if (ImGui::Button("Bubble Sort"))
+                    {
+                        solver.solveBubbleSort();
+                    }
+                    if (ImGui::Button("Quick Sort"))
+                    {
+                        solver.solveQuickSort();
+                    }
+                    ImGui::TreePop();
+                }
 
 
+            }
         }
+        
+        if(isRandomizing)
+        {
+            ImGui::Text("Gerando vetor de tamanho: %i", solver.vectorSize);
+            ImGui::TextColored(ImVec4(1, 1, 0.3, 1), "GERANDO VETOR...");
+        }
+        ImGui::Spacing();
+        ImGui::Spacing();
 
         if (isRunning)
         {
