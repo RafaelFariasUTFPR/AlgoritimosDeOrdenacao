@@ -25,7 +25,6 @@ int main()
 
     
 
-
     while (global.window.isOpen())
     {
         
@@ -39,7 +38,7 @@ int main()
             }
         }
 
-        //global.window.setFramerateLimit(15);
+        global.window.setFramerateLimit(144);
         solver.process();
         double fps = 1 / global.deltaTime;
 
