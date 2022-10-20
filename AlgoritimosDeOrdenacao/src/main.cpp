@@ -23,7 +23,7 @@ int main()
     
     Solver solver(global);
 
-    
+    solver.generateVector();
 
     while (global.window.isOpen())
     {

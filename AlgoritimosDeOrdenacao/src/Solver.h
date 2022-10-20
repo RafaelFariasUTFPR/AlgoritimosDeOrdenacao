@@ -37,7 +37,7 @@ public:
 	int targetSps = 4000;
 
 	bool isVisual = true;
-	int vectorSize = 1000;
+	int vectorSize = WINDOW_WIDTH - MENU_WIDTH;
 
 
 private:
