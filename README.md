@@ -5,6 +5,10 @@
 
 Este projeto é uma visualização gráfica de alguns algoritimos de ordenação.
 
+## Tecnologias
+
+Esta aplicação foi escrita na linguagem C++, e fez uso da biblioteca gráfica [SFML](https://www.sfml-dev.org/).
+
 ## Como instalar?
 
 Instale toda a pasta ```bin``` [aqui](https://github.com/RafaelFariasUTFPR/AlgoritimosDeOrdenacao/tree/master/bin), este contem os arquivos binários, dlls e outros recursos, após isso basta executar o arquivo ```AlgoritimosDeOrdenacao.exe```.
