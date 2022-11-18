@@ -54,7 +54,7 @@ int main()
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip(u8"- Frames por segundo");
 
-
+        //ImGui::Text(std::to_string(ImGui::GetTime()));
         ImGui::SameLine(110);
         if(solver.targetSps == 0)
             ImGui::Text("PPS: Destravado");
