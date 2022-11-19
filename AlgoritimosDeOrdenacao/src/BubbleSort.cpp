@@ -15,7 +15,7 @@ void BubbleSort::solve()
 	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
 		bool swapped = false;
-		for (int j = 0; j < sortingVector->size() - 1; j++)
+		for (int j = 0; j < sortingVector->size() - i - 1; j++)
 		{
 			lastNumberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
@@ -37,7 +37,7 @@ void BubbleSort::solveTrhead()
 	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
 		bool swapped = false;
-		for (int j = 0; j < sortingVector->size() - 1; j++)
+		for (int j = 0; j < sortingVector->size() - i - 1; j++)
 		{
 			lastNumberOfSteps++;
 			if (sortingVector->at(j) > sortingVector->at(j + 1))
