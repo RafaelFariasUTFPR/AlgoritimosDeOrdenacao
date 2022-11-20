@@ -11,6 +11,12 @@ BubbleSort::BubbleSort(std::vector<int>* _sortingVector) : AlgorithmMaster(_sort
 void BubbleSort::solve()
 {
 	startSort();
+	
+	if (sortingVector->size() <= 1)
+	{
+		finishSort();
+		return;
+	}
 
 	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
@@ -34,6 +40,14 @@ void BubbleSort::solve()
 void BubbleSort::solveTrhead()
 {
 	startSort();
+	
+	if (sortingVector->size() <= 1)
+	{
+		finishSort();
+		return;
+	}
+
+
 	for (int i = 0; i < sortingVector->size() - 1; i++)
 	{
 		bool swapped = false;

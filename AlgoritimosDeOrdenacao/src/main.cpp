@@ -146,15 +146,32 @@ int main()
 
         ImGui::Text(u8"RESULTADO ANTERIOR");
 
-        ImGui::BeginListBox("", ImVec2(MENU_WIDTH-15, 50));
+        ImGui::BeginListBox("", ImVec2(MENU_WIDTH-15, 150));
 
         ImGui::Text(u8"Tempo de execução:");
         ImGui::SameLine();
         ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%f ms", lastExecutionTime);
 
+        if (ImGui::Button("Copiar tempo"))
+        {
+            ImGuiIO& io = ImGui::GetIO(); 
+            io.SetClipboardTextFn(nullptr, std::to_string(lastExecutionTime).c_str());
+        }
+
         ImGui::Text(u8"Numero de passos:");
         ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%lu", lastNumberOfSteps);
+        if(lastNumberOfSteps < 1000000)
+            ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%lu", lastNumberOfSteps);
+        else
+        {
+            ImGui::TextColored(ImVec4(1, 0.2, 0.2, 1), "%lu E6", lastNumberOfSteps / 1000000);
+        }
+
+        if (ImGui::Button("Copiar passos"))
+        {
+            ImGuiIO& io = ImGui::GetIO();
+            io.SetClipboardTextFn(nullptr, std::to_string(lastNumberOfSteps).c_str());
+        }
 
         ImGui::EndListBox();
 

@@ -17,7 +17,7 @@ extern bool isRandomizing;
 
 
 extern float lastExecutionTime;
-extern unsigned long int lastNumberOfSteps;
+extern unsigned long long lastNumberOfSteps;
 extern double deltaDecaSps;
 
 class Global

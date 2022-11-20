@@ -6,7 +6,7 @@ bool isRandomizing = false;
 
 
 float lastExecutionTime = 0.0;
-unsigned long int lastNumberOfSteps = 0;
+unsigned long long lastNumberOfSteps = 0;
 double deltaDecaSps = 0;
 
 void Global::alert(std::string text)

@@ -49,7 +49,7 @@ void CountingSort::solveTrhead()
 
     for (int i = 0; i < sortingVectorCopy.size(); i++)
     {
-        sortingVector->at(sortingVectorCopy.at(i))+= (WINDOW_HEIGHT / 2);
+        sortingVector->at(sortingVectorCopy.at(i)) += (WINDOW_HEIGHT / 2);
         count.at(sortingVectorCopy.at(i))++;
         spsDelay();
         lastNumberOfSteps++;
