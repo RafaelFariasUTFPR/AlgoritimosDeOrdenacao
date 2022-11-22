@@ -22,7 +22,6 @@ void QuickSort::solveTrhead()
 
 void QuickSort::recursiveQuickSort(int low, int high)
 {
-    lastNumberOfSteps++;
     if (low < high) {
 
         // find the pivot element such that
@@ -39,18 +38,11 @@ void QuickSort::recursiveQuickSort(int low, int high)
 }
 void QuickSort::recursiveQuickSortThread(int low, int high)
 {
-    lastNumberOfSteps++;
     if (low < high) {
-
-        // find the pivot element such that
-        // elements smaller than pivot are on left of pivot
-        // elements greater than pivot are on righ of pivot
         int pi = partition(low, high);
 
-        // recursive call on the left of pivot
         recursiveQuickSortThread(low, pi - 1);
 
-        // recursive call on the right of pivot
         recursiveQuickSortThread(pi + 1, high);
     }
 }
@@ -67,7 +59,7 @@ int QuickSort::partition(int low, int high)
         if (sortingVector->at(j) <= pivot) {
 
             i++;
-
+            lastNumberOfSteps++;
             swap(i, j);
         }
     }
